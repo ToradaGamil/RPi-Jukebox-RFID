@@ -63,8 +63,13 @@ if($_POST['ACTION'] == "userScript") {
 
 $messageAction .= "Executed 'sudo ".$conf['scripts_abs']."/userscripts/".$post['folder']." ".$post['folderNew']."'";
  // funktionstest // $exec = "sudo mkdir '".$Audio_Folders_Path."/".$post['folderNew']."'; sudo touch '".$Audio_Folders_Path."/".$post['folderNew']."/'".$post['folder'];
- 
-            $exec = "sudo ".$conf['scripts_abs']."/userscripts/".$post['folder']." ".$post['folderNew'];
+          
+    
+            $escapedFolder = escapeshellarg($post['folder']);
+            $escapedFolderNew = escapeshellarg($post['folderNew']);
+
+            $exec = "sudo ".$conf['scripts_abs']."/userscripts/".$escapedFolder." ".$escapedFolderNew;
+
             exec($exec);
 
 }
